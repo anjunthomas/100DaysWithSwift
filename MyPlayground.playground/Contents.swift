@@ -78,3 +78,4 @@ let quote2 = "Then he tapped a sign saying \(name1) and my age is \(age)"
 print(quote2)
 
 print("5 x 5 is \(5*5)")
+print(hi)
