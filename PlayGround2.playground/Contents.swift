@@ -107,3 +107,44 @@ day = Weekday.tuesday
 day = Weekday.friday // have to choose one of the days listed in the enum
 
 day = .wednesday // like so
+
+// type annotation
+let surname: String = "Lasso"
+var score: Int = 0
+var score1: Double = 0
+let playerName: String = "Roy"
+var pi: Double = 3.141
+var isAuthenticated: Bool = true
+
+// array type annotation
+var albums3: [String] = ["Red",  "Fearless"]
+
+//dictionary type annotation
+var user: [String: String] = ["id": "@twostraws"]
+
+// set type annotation
+var books: Set<String> = Set(["The Bluest Eye", "Foundation", "Girl"])
+
+// array type annotation, but kind of redudant because implicit assumption of string array looking at contents
+var soda: [String] = ["Coke", "Pepsi", "Irn-Bru"]
+var teams: [String] = [String]()
+
+var cities: [String] = []
+
+enum UIStyle{
+    case light, dark, system
+}
+
+var style = UIStyle.light
+style = .dark
+
+let username: String
+username = "@twostraws" // this is necessary, the variable declaration is like a promise, you must provide the initialization after
+print(username)
+
+let days: [String] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Monday", "Tuesday", "Saturday"]
+print(days.count)
+
+let uniqueDays: Set<String> = Set(days)
+
+print(uniqueDays.count)
