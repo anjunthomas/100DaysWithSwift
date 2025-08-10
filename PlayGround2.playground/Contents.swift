@@ -412,3 +412,93 @@ func isUpperCase(_ string: String) -> Bool {
 let string = "HELLO, WORLRD"
 let result4 = isUpperCase(string)
 print(result4)
+
+// default values for any or all parameters
+func printTimesTables(for number: Int, end: Int = 12) {
+    for i in 1...end{
+        print("\(i) x \(number) = \(i * number)")
+    }
+}
+
+printTimesTables(for: 5)
+printTimesTables(for: 7, end: 10)
+
+// default parameters another example
+var characters = ["Lane", "Pam", "Ray", "Sterling"]
+print(characters.count)
+characters.removeAll(keepingCapacity: true)
+
+// real use case
+func findDirections(from: String, to: String, route: String = "fastest", avoidhighways: Bool = true){
+}
+
+findDirections(from: "London", to: "Ibiza")
+findDirections(from: "India", to: "New York", route: "scenic")
+findDirections(from: "Scotland", to: "Germany", route: "scenic", avoidhighways: false)
+
+
+// ERROR HANDLING
+enum PasswordError: Error{ // there is an error type in swift
+    case short, obvious
+}
+
+func checkPassword(_ password: String) throws -> String { // being marked with throws does not mean the function must throw errors, only that it might
+    if password.count < 5 {
+        throw PasswordError.short // coming from the enum case
+    }
+    
+    if password == "12345" {
+        throw PasswordError.obvious
+    }
+    
+    if password.count < 8 {
+        return "OK"
+    } else if password.count < 10 {
+        return "Good"
+    } else {
+        return "excellent"
+    }
+}
+
+func someRiskyWork(){
+    print("hello")
+}
+// error handling after running the function
+do {
+    let result = try checkPassword("12345") // try must be written before calling all functions that might throw errors, and is a visual signal to developeres that regular code execution will be interrupted if an error happens
+} catch PasswordError.short {
+    print("Your password is too short")
+} catch PasswordError.obvious {
+    print("Your password is too obvious, change it to something more secure")
+} catch {
+    print("There was an unidentified error")
+}
+
+// Checkpoint 4
+
+enum SquareRoot: Error{
+    case outOfBounds
+}
+
+func findSquareRoot(number: Int) throws -> Int {
+    if number < 1 || number > 10_000{
+        throw SquareRoot.outOfBounds
+    }
+    
+    for i in 1...100 {
+        if i * i == number{
+            return i
+        }
+    }
+    let defaultValue = 1
+    return defaultValue
+}
+
+do {
+    let result10 = try findSquareRoot(number: 25)
+    print(result10)
+} catch SquareRoot.outOfBounds{
+    print("The number you chose was out of bounds")
+} catch {
+    print("There was an error")
+}
