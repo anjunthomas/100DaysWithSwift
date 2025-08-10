@@ -236,4 +236,24 @@ let canVote = age >= 18 ? "Yes" : "No"
 let hour = 12
 print(hour < 12 ? "It's before noon" : "it's after noon")
 
+let platforms = ["ios", "macOS", "tvOS"]
+for os in platforms {
+    print("Swift works great on \(os)")
+}
 
+for i in 1...12 {
+    print("5 x \(i) is \(5 * i)")
+}
+
+var lyric = "Haters gonna"
+
+for _ in 1...5 {
+    lyric += " hate"
+}
+print(lyric)
+
+let names = ["Sterling", "Cyril", "Lana"]
+
+for name in names {
+    print("\(name) is a secret agent")
+}
