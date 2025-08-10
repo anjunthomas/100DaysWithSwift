@@ -325,3 +325,90 @@ for i in 1...100 {
         print(i)
     }
 }
+
+
+// function syntax
+func showWelcome(){
+    print("Welcome to my app!")
+    print("by default this prints out a conversation")
+    print("chart from centimeters to inches, but you")
+    print("can also set a custom range if you want.")
+}
+
+showWelcome()
+
+// parameter
+func printTimesTables(number: Int){
+    for i in 1...12 {
+        print("\(i) x \(number) is \(i * number)")
+    }
+}
+
+printTimesTables(number: 5)
+
+func rollDice() -> Int {
+    return Int.random(in: 1...6)
+}
+
+let result = rollDice()
+print(result)
+
+
+func sameLetter(string1: String, string2: String) -> Bool {
+    if string1.sorted() == string2.sorted(){
+        return true
+    }
+    return false
+    /* code could have been
+    return string1.sorted() == string2.sorted()
+     // since this is one line of code, you can remove the return keyword too
+     
+     
+     */
+}
+
+let answer = sameLetter(string1: "hello", string2: "hi")
+print(answer)
+
+
+func pythagoras(base: Double, height: Double) -> Double{
+    sqrt(base * base + height * height)
+}
+
+let result3 = pythagoras(base: 3, height: 4)
+print(result3)
+
+func getUser() -> (firstName: String, lastName: String) {
+    (firstName: "Taylor", lastName: "Swift") // this is a tuple, use it to return multiple return types
+}
+
+let user2 = getUser()
+print("Name: \(user2.firstName) \(user2.lastName)")
+
+
+// same as above code but using tuple to return values now
+
+func getUser2() -> (firstName: String, lastName: String){
+    ("Taylor", "Swift")
+}
+
+let user4 = getUser2()
+print("Name \(user4.firstName) \(user4.lastName)")
+
+// or, elements can not have names in tuples
+
+func getUser3() -> (String, String){
+    ("Taylor", "Swift")
+}
+
+let user5 = getUser3()
+print("Name \(user5.0) \(user5.1)")
+
+
+func isUpperCase(_ string: String) -> Bool {
+    string == string.uppercased()
+}
+
+let string = "HELLO, WORLRD"
+let result4 = isUpperCase(string)
+print(result4)
