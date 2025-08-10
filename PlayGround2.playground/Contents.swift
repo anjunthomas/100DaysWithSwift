@@ -257,3 +257,71 @@ let names = ["Sterling", "Cyril", "Lana"]
 for name in names {
     print("\(name) is a secret agent")
 }
+
+
+var countdown = 10
+
+while countdown > 0 {
+    print("\(countdown)")
+    countdown -= 1
+}
+
+print("Blast Off!")
+
+
+let amount = Double.random(in: 0...20)
+
+let filesnames = ["me.jpg", "work.txt", "sophie.jpg", "logo.psd"]
+
+for filename in filesnames {
+    if filename.hasSuffix(".jpg") == false{
+        continue
+    }
+    
+    print("Found picture: \(filename)")
+}
+
+
+/* wanting to see how many scores player achieved before hitting a 0 */
+let scores2 = [1, 8, 4, 3, 0, 5, 2]
+var count = 0
+
+for score in scores2 {
+    if score == 0 {
+        break
+    }
+    
+    count += 1
+}
+
+print("You had \(count) scores before you got 0")
+
+let options = ["up", "down", "left", "right"]
+let secretCombination = ["up", "up", "right"]
+
+outerLoop: for option1 in options {
+    for option2 in options {
+        for option3 in options {
+            let attempt = [option1, option2, option3]
+            
+            if attempt == secretCombination {
+                print("The combination is \(attempt)!")
+                break outerLoop // stopping as soon as the secret combination has been matched
+            }
+        }
+    }
+}
+
+// fizzbuzz
+
+for i in 1...100 {
+    if i.isMultiple(of: 3) && i.isMultiple(of: 5){
+        print("FizzBuzz")
+    } else if i.isMultiple(of: 3){
+        print("Fizz")
+    } else if i.isMultiple(of: 5){
+        print("Buzz")
+    } else {
+        print(i)
+    }
+}
