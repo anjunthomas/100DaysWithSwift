@@ -148,3 +148,92 @@ print(days.count)
 let uniqueDays: Set<String> = Set(days)
 
 print(uniqueDays.count)
+
+let ourName = "Dave Lister"
+let friendName = "Arnold Rimmer"
+
+if ourName < friendName { // checks to see which one comes first alphabetically
+    print("It's \(ourName) vs \(friendName)")
+} else{
+    print("It's \(friendName) vs \(ourName)")
+}
+
+var numbers = [1, 2, 3]
+numbers.append(4)
+
+if numbers.count > 3 {
+    numbers.remove(at: 0)
+}
+
+print(numbers)
+
+var numbers2 = [1,2,3]
+numbers2.append(4)
+
+// if greater than 3 numbers exist in the array remove the oldest number (similar to a queue)
+if numbers2.count > 3 {
+    numbers2.remove(at: 0) //
+}
+
+print(numbers2)
+
+
+var name3 = "Taylor Swift"
+
+if name3 == ""{
+    name3 == "Anonymous"
+}
+
+if name3.isEmpty {
+    name3 = "Anonymous"
+}
+
+if name3 != "Anonymous"{
+    print("Hello \(name3)")
+}
+
+enum TransportationOption {
+    case airplane, helicopter, bicycle, car, scooter
+}
+
+let transport = TransportationOption.airplane
+
+if transport == .airplane || transport == .helicopter {
+    print("Let's fly")
+} else if transport == .bicycle {
+    print("I hope there's a bike path...")
+} else if transport == .car {
+    print("Time to get stuck in traffic")
+} else {
+    print("I'm going to hire a scooter now!")
+}
+
+enum Weather {
+    case sun, rain, wind, snow, unknown
+}
+
+let forecast = Weather.sun
+
+switch forecast {
+case .sun:
+    print("it should be a nice day")
+case .rain:
+    print("Pack an umbrella")
+case .wind:
+    print("wear something warm")
+case .snow:
+    print("School is getting cancelled")
+case .unknown:
+    print("Our forecast generator is broken!")
+}
+
+let isAuthenticated1 = true
+print(isAuthenticated1 ? "Welcome": "Who are you")
+
+let age = 18
+let canVote = age >= 18 ? "Yes" : "No"
+
+let hour = 12
+print(hour < 12 ? "It's before noon" : "it's after noon")
+
+
