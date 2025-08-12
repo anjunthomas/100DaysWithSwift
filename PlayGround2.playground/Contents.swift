@@ -502,3 +502,92 @@ do {
 } catch {
     print("There was an error")
 }
+
+
+func greetUser(){
+    print("Hi There")
+}
+
+greetUser()
+
+var greetCopy = greetUser // when you are copying functions, you don't add a parentheses after it
+greetCopy
+
+let sayHello = {
+    print( "Hello")
+}
+
+sayHello()
+
+let sayHello1 = { (name: String ) -> String in
+        "Hi \(name)!"
+}
+
+var greetCopy1: () -> Void = greetUser // empty parenthesis means it accepts no parameters, returns no value, and doees not throug h errors
+
+let team = ["gloria", "Suzanne", "Piper", "Tiffany", "Tasha"]
+
+// closure in practice
+let captainFirstTeam = team.sorted(by: { (name1: String, name2: String ) -> Bool in
+    if name1 == "Suzanne" {
+        return true
+    } else if name2 == "Suzanne"{
+        return false
+    }
+    return name1 < name2
+})
+
+print(captainFirstTeam)
+
+// Structs - this is our own complex data type with own variables and functions
+struct Album { // a struct should be capitalized
+    let title: String
+    let artist: String
+    let year: Int
+    
+    func printSummary(){
+        print("\(title) (\(year)) by \(artist)")
+    }
+}
+
+let red = Album(title: "Red", artist: "Taylor Swift", year: 2012)
+let wings = Album(title: "Wings", artist: "BTS", year: 2016)
+
+print(red.title)
+print(wings.artist)
+
+red.printSummary()
+wings.printSummary()
+
+
+struct Employee {
+    let name: String
+    var vacationRemaining: Int
+    
+    mutating func takeVacation(days: Int) {
+        if vacationRemaining >= days {
+            vacationRemaining -= days
+            print("I'm going on vacation")
+            print("Days remaining: \(vacationRemaining)")
+        } else {
+            print("Oops! There aren't enough days remaining.")
+        }
+    }
+}
+
+struct Employee1{
+    let name: String
+    var vacationAllocated = 14
+    var vacationTaken = 0
+    
+    var vacationRemaining: Int { // using this to compute the property
+        vacationAllocated - vacationTaken
+    }
+}
+
+var archer = Employee1(name: "Sterling Archer", vacationAllocated: 14)
+archer.vacationTaken += 4
+print(archer.vacationRemaining)
+archer.vacationTaken += 4
+print(archer.vacationRemaining)
+
