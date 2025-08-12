@@ -729,3 +729,123 @@ struct Cabinet {
 }
 let drawers = Cabinet(itemHeight: 1.4, itemWidth: 1.0)
 print(drawers)
+
+struct BankAccount1 {
+    private var funds = 0 // telling us that funds should only be accessbile inside the struct, so that instantiated BankAccount1.funds isn't accessible outside the struct
+    
+    mutating func withdraw(amount: Int) -> Bool {
+        if funds >= amount {
+            funds -= amount
+            return true
+        } else {
+            return false
+        }
+    }
+}
+
+// funds is private inside of the struct, so you can no longer do this, account.funds -= 1000
+
+// use private for don't let anyone outside the struct use this
+// use fileprivate for don't let anything outside the current file use this
+// use public for "let anyone, anywhere use this"
+
+// private(set) - let anyone read this property, but only let my methods write it
+// so you could print account.funds outside the struct, but only deposit() and withdraw() could actually change its value
+
+
+struct Person{
+    private var socialSecurityNumber: String
+    init(ssn: String){
+        socialSecurityNumber = ssn // self. is used when the property name and parameter name have the same names
+                                    // you can use it here if you want, but it is not necessary
+    }
+}
+
+let sarah = Person(ssn: "555-55-5555")
+
+
+struct School {
+    var staffNames: [String]
+    private var studentNames: [String]
+    init(staff: [String]) {
+        self.staffNames = staff
+        self.studentNames = [String]() // intitialized as an empty string array
+    }
+}
+
+let royalHigh = School(staff: ["Mrs Hughes"])
+
+//struct School1 {
+//    var studentCount = 0 // static means that studentCount property and add function belong to the struct itself, rather than a particular instance of the struct
+//    
+//    static func add(student: String) {
+//        print("\(student) joined the school")
+//        studentCount += 1
+//    }
+//}
+//
+
+// using static properties to common data in apps
+struct AppData {
+    static let version = "1.3 beta 2"
+    static let saveFileName = "settings.json"
+    static let homeURL = "http://www.hackingwithswift.com"
+}
+
+struct Employee5 {
+    let username: String
+    let password: String
+    
+    static let example = Employee5(username: "cfederico", password: "hairforceone")
+    // this is commonly used to work in design previews
+}
+
+Employee5.example
+
+struct Amplifier {
+    static let maximumVolume = 11 // belongs to struct Amplifier
+    var currentVolume: Int // an instance property of struct amplifier
+}
+
+struct Cat {
+    static let allCats = [Cat]()
+   
+    static func chorus() {
+        for _ in allCats {
+            print("Meow")
+        }
+    }
+}
+
+//struct LegoBrick {
+//    static var numbermade = 0
+//    var shape: String
+//    var color: String
+//    init(shape: String, color: String){
+//        self.shape = shape
+//        self.color = color
+//        LegoBrick.numbermade += 1
+//    }
+//}
+
+struct Car {
+    let model: String
+    private let numberOfSeats: String
+    var currentGear: String
+    
+    mutating func changeGear(to gear: String, isGearUp: Bool){
+        self.currentGear = gear
+        
+        if isGearUp {
+            self.currentGear = "Up"
+        } else {
+            self.currentGear = "Down"
+        }
+    }
+    
+    init(model: String, numberOfSeats: String, currentGear: String) {
+        self.model = model;
+        self.numberOfSeats = numberOfSeats;
+        self.currentGear = currentGear;
+    }
+}
