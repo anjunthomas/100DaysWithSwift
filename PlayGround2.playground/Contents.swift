@@ -580,8 +580,16 @@ struct Employee1{
     var vacationAllocated = 14
     var vacationTaken = 0
     
-    var vacationRemaining: Int { // using this to compute the property
-        vacationAllocated - vacationTaken
+    
+    // using this to compute the property
+    var vacationRemaining: Int { // computed properties must always have a specific type, here it is Int
+        get{
+            vacationAllocated - vacationTaken
+        }
+        set { // should return not print if these computed properties are strings
+            vacationAllocated = vacationTaken + newValue // adding new value days that you used vacation + a given nubmer
+        }
+        
     }
 }
 
@@ -591,3 +599,133 @@ print(archer.vacationRemaining)
 archer.vacationTaken += 4
 print(archer.vacationRemaining)
 
+// adding getter and setter for instance of Employee 1 called jessica
+var jessica = Employee1(name: "Jessica", vacationAllocated: 14)
+jessica.vacationTaken += 4
+jessica.vacationRemaining = 5
+print("this is how many vacation days are allocated for jessica")
+print(jessica.vacationAllocated)
+
+
+// Attaching the print() call directly to the property using didSet, so that whenever it changess it will print for us
+// can be any code I think
+
+struct Game {
+    var score = 0 {
+        willSet {
+            print("Current value is: \(score)")
+            print("New value will be: \(newValue)")
+        }
+        
+        didSet {
+            print("Score is now \(score)")
+            print("Old value was \(oldValue)") // swift automatically stores these old and new values inside didSet and willSet respectively
+        }
+    }
+}
+
+var game = Game()
+game.score += 10
+game.score -= 3
+game.score -= 1
+
+
+
+struct App {
+    var contacts = [String]() {
+        willSet { // willSet used by switft to handle animations so that it can take a screenshot of the user interface before a change
+            print("Current value is: \(contacts)")
+            print("new value will be: \(newValue)")
+        }
+        
+        didSet{ // we use didSet because we want to take action after the change has happened so we can update our user Interface, save changes
+            print("There are now \(contacts.count) contacts")
+            print("old value was \(oldValue)")
+        }
+    }
+}
+
+var app = App()
+app.contacts.append("Adrian E")
+print("Adding new contact")
+app.contacts.append("Allen W")
+
+// note, will set is used much less than did set
+
+struct BankAccount {
+    var name: String
+    var isMillionaire = false
+    var balance: Int {
+        didSet {
+            if balance > 1_000_000 {
+                isMillionaire = true
+            } else {
+                isMillionaire = false
+            }
+        }
+    }
+}
+
+// Custom Initializer in swift
+// these are specialized methods that are designed to prepare a new struct instance to be used
+// swift silently generates one based on the properties we place inside the struct - memberwise intializer
+// we can also create our own
+// IMPORTANT
+// all properties must have a value by the time the intializer ends
+
+// adding custom initialion to the Player struct
+struct Player {
+    let name: String
+    let number: Int
+    
+    init(name: String, number: Int) {
+        self.name = name // using self to assign parameters to properties to clarify we mean "assign the name parameter to                my current instances name
+        self.number = number
+    }
+}
+
+// as long as properties havea value by the time the initilaizer ends, you can do anything
+// if you are creating a custom init, then Swift discards the default memberwise initializerbecause it assumes you no longer need it
+
+struct Player1{
+    let name: String
+    let number: Int
+    
+    init(name: String){
+        self.name = name
+        number = Int.random(in: 1...99) // initializing number inside of the init
+    }
+}
+
+let player = Player1(name: "Megan R")
+print(player.number)
+
+// using extension to keep default memberwise intializer
+struct Employee3 {
+    var name: String
+    var yearsActive = 0
+}
+
+extension Employee3 {
+    init() {
+        self.name = "Anon"
+        print("Creating an anonymouse employee")
+    }
+}
+
+let roslin = Employee3(name: "Laura Roslin") // this just creates an instance of Employee 3 with the memberwise (default) initializer
+let anon = Employee3() // this creates a anonymous employee using the extended empolyee
+
+struct Cabinet {
+    var height: Double
+    var width: Double
+    var area: Double
+    
+    init (itemHeight: Double, itemWidth: Double) {
+        height = itemHeight
+        width = itemWidth
+        area = height * width
+    }
+}
+let drawers = Cabinet(itemHeight: 1.4, itemWidth: 1.0)
+print(drawers)
