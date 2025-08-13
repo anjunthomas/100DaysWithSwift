@@ -1136,5 +1136,53 @@ user11.name = "Taylor"
 user11 = User8()
 print(user11.name)
 
+// creating a vehicle protocol
+protocol Vehicle5 { // protocol is a lot like a function prototype
+    func estimateTime(for distance: Int) -> Int
+    func travel(distance: Int)
+}
 
+struct Car10: Vehicle5 {
+    // all methods we listed in Vehicle must exist exactly in Car, if they have slightly different names, accept different parameters, have different return types, then Swift says we haven't confirmed to the protocol
+    func estimateTime(for distance: Int) -> Int {
+        distance / 50
+    }
+    
+    func travel(distance: Int){
+        print("i'm driving \(distance)km.")
+    }
+    
+    func openSunroot() {
+        print("It's a nice day")
+    }
+}
+
+// dictionary [String: String]
+let opposites = [
+    "Mario": "Wario",
+    "Luigi": "Waluigi"
+]
+
+let peachOpposite = opposites["Peach"] // it returns nil because there is no matching value to key Peach
+
+// way to unwrap optionals
+if let marioOpposite = opposites["Mario"] {
+    print("Mario's opposite is \(marioOpposite)") // this will only print if optional unwrapping was successful
+} else {
+    print("The optional was empty.")
+}
+
+// EVERY TYPE OF DATA TYPE CAN BE OPTIONAL IF NEEDED
+// including array and dictionary
+
+
+// optionals
+//func square(nunber1: Int) -> Int {
+//    number1 * number1
+//}
+//
+//var number = Int? = nil
+//if let unwrappedNumber = number {
+//    print(square(number: number))
+//}
 
