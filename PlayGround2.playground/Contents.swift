@@ -828,6 +828,7 @@ struct Cat {
 //    }
 //}
 
+// Checkpoint 6
 struct Car {
     let model: String
     private let numberOfSeats: String
@@ -849,3 +850,291 @@ struct Car {
         self.currentGear = currentGear;
     }
 }
+
+struct Sandwich {
+    var name: String
+    var fillings: [String]
+}
+let blt = Sandwich(name: "BLT", fillings: ["Bacon", "Lettuce", "Tomato"])
+
+class Game1 {
+    var score = 0 {
+        didSet {
+            print("Score is now \(score)")
+        }
+    }
+}
+
+var newGame = Game1()
+newGame.score += 10 // this sets the score in the intance of class Game1 called newGame
+
+class BoardGame {
+    var name: String
+    var minimumPlayers = 1
+    var maximumPlayers = 4
+    init(name: String) {
+        self.name = name // only initializing name because all other stored properties were initialized before use with default values
+    }
+}
+
+class TIE {
+    var name: String
+    var speed: Int
+    init(name: String, speed: Int) {
+        self.name = name
+        self.speed = speed
+    }
+}
+let fighter = TIE(name: "TIE Fighter", speed: 50)
+let interceptor = TIE(name: "TIE Interceptor", speed: 70)
+
+class VideoGame {
+    var hero: String
+    var enemy: String
+    init(heroName: String, enemyName: String){
+        self.hero = heroName
+        self.enemy = enemyName
+    }
+}
+
+let monkeyIsland = VideoGame(heroName: "Guybrush Threepwood", enemyName: "LeChuck")
+
+class Image {
+    var fileName: String
+    var isAnimated: Bool
+    init(fileName: String, isAnimated: Bool){
+        self.fileName = fileName // parameters and properties have the same names, so Swift requires that we use self to distinguish the properties
+        self.isAnimated = isAnimated
+    }
+}
+
+class ThemePark {
+    var entryPrice: Int
+    var rides: [String]
+    init(rides: [String]){
+        self.rides = rides
+        self.entryPrice = rides.count * 2
+    }
+}
+
+class Podcast {
+    var hosts: [String]
+    init(hosts: [String]){
+        self.hosts = hosts
+    }
+}
+
+class Singer {
+    var name: String
+    var favoriteSong: String
+    init(name: String, song: String){
+        self.name = name
+        self.favoriteSong = song
+    }
+}
+let taylor = Singer(name: "Taylor Swift", song: "Blank Space")
+
+class Employee6 {
+    let hours: Int
+    
+    init(hours: Int){
+        self.hours = hours
+    }
+    
+    func printSummary() {
+        print("I work \(hours) hours a day")
+    }
+}
+
+class Developer: Employee6 {
+    func work() {
+        print("I'm writing code for \(hours) hours")
+    }
+    
+    // if a child class wants to change a method from a parent class, you must use override in the child class's version. This does two things
+    override func printSummary() {
+        print("I'm a developer who will sometimes work \(hours) a day, but other times spend hours arguing about whether code should be indented")
+    }
+}
+///
+class Manager: Employee6 {
+    func work() {
+        print("I'm going to meetings for \(hours) hours.")
+    }
+}
+
+// these child classes can refer directly to hours, it's as if they added that property themselves
+
+let robert = Developer(hours: 8)
+let joseph = Manager(hours: 10)
+
+robert.work()
+joseph.work()
+
+
+
+let novall = Developer(hours: 14)
+novall.printSummary()
+// if you know your class should not suppport inheritance, you can mark it as final.
+// final class = class can inherit from other things, but can't be used to inherit from
+
+class Vehicle {
+    let isElectric: Bool
+    
+    init(isElectric: Bool) {
+        self.isElectric = isElectric
+    }
+}
+
+// a class that inherits from vehicle
+class Car2: Vehicle {
+    let isConvertible: Bool
+    
+    init(isElectric: Bool, isConvertible: Bool){
+        self.isConvertible = isConvertible
+        super.init(isElectric: isElectric) // right IsElectric is the parameter from behicle, right hand is parameter from Car's initializer
+    }
+}
+
+let teslaX = Car2(isElectric: true, isConvertible: false)
+
+class Product {
+    var name: String
+    init(name: String) {
+        self.name = name
+    }
+}
+
+class Book: Product {
+    var isbn: String
+    init(name: String, isbn: String) {
+        self.isbn = isbn
+        super.init(name: name)
+    }
+}
+
+class User {
+    var username = "Anonymous"
+}
+
+var user1 = User() // creating an instance of the class
+var user3 = user1 // taking a copy of user1 and changing the username value next
+
+user3.username = "Taylor"
+print(user1.username) // printing taylor for both user1 and user3
+print(user3.username) //
+
+class User6 {
+    var username = "Anonymous"
+    
+    func copy() -> User6 {
+        let user = User6()
+        user.username = username
+        return user
+    }
+}
+
+var message = "Welcome"
+var greeting5 = message
+greeting5 = "Hello" // value types versus reference types
+// classes use reference types
+// using a class over a struct sends a strong message that you want the data to be shared somehow, rather than having lots of distinct copies
+
+struct GalaticaCrew {
+    var isCylon = false
+}
+
+var starbuck = GalaticaCrew()
+var tyrol = starbuck
+tyrol.isCylon = true
+print(starbuck.isCylon)
+print(tyrol.isCylon)
+
+class Statue {
+    var sculptor = "Unknown"
+}
+
+// this will create two different statues, so it will print two different sculptors
+var venusDeMilo = Statue()
+venusDeMilo.sculptor = "Alexandros of Antioch"
+var david = Statue()
+david.sculptor = "Michaelangelo"
+print(venusDeMilo.sculptor)
+print(david.sculptor)
+
+// an example of class copying reference values
+class Startup {
+    var maxWarp = 9.0
+}
+
+var voyager = Startup()
+voyager.maxWarp = 9.975
+var enterprise = voyager
+enterprise.maxWarp = 10.0
+print(voyager.maxWarp)
+print(enterprise.maxWarp)
+
+class Hairdresser {
+    var clients = [String]()
+}
+var tim = Hairdresser()
+tim.clients.append("Jess")
+var dave = tim
+dave.clients.append("Sam")
+print(tim.clients.count)
+print(dave.clients.count)
+
+
+// scope
+// creating a variable inside a function, you can't access it from outside the function
+// create a variable inside an if condition, that variable is not available outside the condition
+/// create a variable inside a for loop, you can't user it outside the loop
+
+class User7 {
+    let id: Int
+    
+    init(id: Int){
+        self.id = id
+        print("User \(id): I'm alive!")
+    }
+    deinit { // do not write parentheses after denit
+        print("User \(id): I'm dead!")
+    }
+}
+
+// creating a user instance inside the loop and destroying it when the loop iteration finishes
+for i in 1...3 {
+    let user = User7(id: i)
+    print("User \(user.id): I'm in control!")
+}
+
+// adding User instances as they were created, they would only be destroyed when the array is cleared
+var users = [User7]()
+
+for i in 1...3 {
+    let user = User7(id: i)
+    print("User \(user.id): I'm in control")
+    users.append(user)
+}
+
+print("Loop is finished!")
+users.removeAll() // kills off each instance of the class as the array clears
+print("Array is clear!")
+
+class Fairytale {
+    deinit {
+        print("And they lived happily ever after.")
+    }
+}
+
+class User8 {
+    var name = "Paul"
+}
+
+var user11 = User8() // try with let, it will be taylor
+user11.name = "Taylor"
+user11 = User8()
+print(user11.name)
+
+
+
